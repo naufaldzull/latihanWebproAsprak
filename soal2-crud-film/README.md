@@ -42,7 +42,8 @@ aksi berhasil, pencarian judul, pagination 6 film per halaman, dan accessor
 
 ```bash
 # 1. Install dependency (wajib duluan — folder vendor/ tidak ikut di git)
-composer install
+composer install --no-dev --prefer-dist    # cepat, cukup untuk menjalankan web
+# composer install                          # kalau mau sekalian bisa php artisan test
 
 # 2. Siapkan environment
 cp .env.example .env
@@ -80,6 +81,14 @@ Kalau masih gagal, cek `php -v` — pastikan PHP yang dipakai terminal sama deng
 
 **`SQLSTATE[HY000] [1049] Unknown database 'bioskop'`**
 Databasenya belum dibuat. Jalankan `mysql -u root -e "CREATE DATABASE bioskop"`.
+
+**`composer install` lama sekali**
+Wajar untuk instalasi pertama. Beberapa cara mempercepat:
+- pakai `composer install --no-dev --prefer-dist` (hemat ~7.000 file dependency testing)
+- pastikan `extension=zip` dan `extension=curl` aktif di `php.ini`, kalau tidak Composer
+  memakai metode ekstrak cadangan yang jauh lebih lambat
+- kecualikan folder project dari scan real-time Windows Defender
+- jangan Ctrl+C di tengah proses; kalau terlanjur, hapus folder `vendor` lalu ulangi
 
 **`Access denied for user`**
 Sesuaikan `DB_USERNAME` dan `DB_PASSWORD` di `.env`. Di Laragon defaultnya user `root` tanpa password.
