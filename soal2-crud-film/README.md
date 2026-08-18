@@ -4,7 +4,7 @@ Website CRUD untuk mengelola daftar film yang sedang tayang di bioskop.
 
 | Komponen  | Pilihan                       |
 | --------- | ----------------------------- |
-| Framework | **Laravel 13**                |
+| Framework | **Laravel 12** (butuh PHP 8.2+) |
 | Database  | **MySQL / MariaDB**           |
 | ORM       | **Eloquent** (`App\Models\Film`) |
 | Tampilan  | Blade + CSS custom (tema gelap sinema, tanpa CDN) |
@@ -32,10 +32,16 @@ Tambahan: validasi input (pesan error berbahasa Indonesia), flash message setela
 aksi berhasil, pencarian judul, pagination 6 film per halaman, dan accessor
 `durasi_format` yang mengubah `169` menjadi `2j 49m`.
 
+## Prasyarat
+
+- PHP **8.2 atau lebih baru** (cek dengan `php -v`)
+- Composer
+- MySQL / MariaDB (mis. bawaan Laragon atau XAMPP)
+
 ## Cara menjalankan
 
 ```bash
-# 1. Install dependency
+# 1. Install dependency (wajib duluan — folder vendor/ tidak ikut di git)
 composer install
 
 # 2. Siapkan environment
@@ -62,6 +68,21 @@ php artisan test --filter=FilmCrudTest
 ```
 
 Enam test menutup create, read, update, delete, validasi, dan pencarian.
+
+## Kalau ada error
+
+**`Failed to open stream: vendor/autoload.php`**
+Folder `vendor/` belum ada. Jalankan `composer install` dulu di folder yang berisi `artisan`.
+
+**`requires php >= 8.x -> your php version does not satisfy that requirement`**
+Versi PHP-mu terlalu lama. Project ini dikunci ke Laravel 12 yang jalan di PHP 8.2+.
+Kalau masih gagal, cek `php -v` — pastikan PHP yang dipakai terminal sama dengan yang di Laragon.
+
+**`SQLSTATE[HY000] [1049] Unknown database 'bioskop'`**
+Databasenya belum dibuat. Jalankan `mysql -u root -e "CREATE DATABASE bioskop"`.
+
+**`Access denied for user`**
+Sesuaikan `DB_USERNAME` dan `DB_PASSWORD` di `.env`. Di Laragon defaultnya user `root` tanpa password.
 
 ## File utama
 

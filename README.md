@@ -3,7 +3,7 @@
 Struktur folder untuk latihan soal praktikum.
 
 ## soal2-crud-film — **selesai**
-Website CRUD data film bioskop: **Laravel 13 + MySQL + Eloquent ORM**.
+Website CRUD data film bioskop: **Laravel 12 + MySQL + Eloquent ORM**.
 
 Properti data film: `id`, `judul`, `durasi` (integer, menit), `deskripsi`.
 Create / Read / Update / Delete lengkap, plus validasi input, pencarian judul,
